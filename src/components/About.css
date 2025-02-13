@@ -1,0 +1,129 @@
+/* Profile Container */
+.profile-container {
+  margin-top:200px; 
+ 
+  max-width: screen;
+  margin: auto;
+  padding: 40px;
+  background: #1e1e2f;
+  color: #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Profile Image */
+.profile-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-img {
+  margin-top: 50px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid #1dbf73;
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-img:hover {
+  transform: scale(1.1);
+}
+
+/* Profile Name */
+.profile-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1dbf73;
+  margin-top: 15px;
+}
+
+/* Tagline & Role */
+.tagline {
+  font-size: 1.2rem;
+  color: #ddd;
+}
+
+.role {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-top: 5px;
+}
+
+/* Social Links */
+.social-links {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 1.8rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.facebook {
+  color: #1877f2;
+}
+
+.twitter {
+  color: #1da1f2;
+}
+
+.github {
+  color: #ffffff; 
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+/* Skills Section */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.skill-tag {
+  background: #292b3a;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 2px 2px 8px rgba(0, 255, 127, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.skill-tag:hover {
+  transform: scale(1.1);
+}
+
+/* Objective Section */
+.objective {
+  margin-top: 30px;
+  background: #292b3a;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.objective h2 {
+  color: #1dbf73;
+  font-size: 1.8rem;
+}
+
+.objective p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ddd;
+  margin-top: 10px;
+}
