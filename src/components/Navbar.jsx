@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
 import imgs from "../assets/react.svg";
+import resume from "../assets/resume.pdf";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,36 +14,52 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav className="navbar">
-        <a href="#" className="logo" title="Arvind Kumar">
+      <motion.nav
+        className="navbar"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        {/* Logo */}
+        <motion.a
+          href="#"
+          className="logo"
+          title="Arvind Kumar"
+          whileHover={{ scale: 1.1 }}
+        >
           <img src={imgs} alt="Logo" />
-        </a>
+        </motion.a>
+
+        {/* Mobile Menu Toggle Button */}
         <button className="menu-toggle" onClick={toggleMenu}>
-          <i className="fa-solid fa-bars"></i>
+          {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
-        <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-          <li>
+
+        {/* Navigation Links */}
+        <motion.ul
+          className={`nav-links ${menuOpen ? "active" : ""}`}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <motion.li whileHover={{ scale: 1.1 }}>
             <a href="#">Home</a>
-          </li>
-          <li>
-            <a
-              href="https://www.canva.com/design/DAGd9yjyHWU/6fEXF5hvVUuY0t6-hUFIng/edit?utm_content=DAGd9yjyHWU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Resume
+          </motion.li>
+          <motion.li whileHover={{ scale: 1.1 }}>
+            <a href={resume} target="_blank" rel="noopener noreferrer">
+              View Resume
             </a>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li whileHover={{ scale: 1.1 }}>
             <a
               href="mailto:arvindkumar8960905167@gmail.com?subject=Hiring Inquiry&body=Hello Arvind, I would like to discuss an opportunity!"
               className="hire-me-button"
             >
               Hire Me
             </a>
-          </li>
-        </ul>
-      </nav>
+          </motion.li>
+        </motion.ul>
+      </motion.nav>
     </header>
   );
 };

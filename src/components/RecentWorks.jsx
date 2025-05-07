@@ -1,133 +1,194 @@
-import React from "react";
-import "./RecentWorks.css"; // Import CSS file
-import { FaExternalLinkAlt, FaCode } from "react-icons/fa"; // Import Icons
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { FaExternalLinkAlt, FaCode } from "react-icons/fa";
 import imageGene from "../assets/imageGene.webp";
 import chatbot from "../assets/chatbot.gif";
 import todo from "../assets/todo.gif";
 import port from "../assets/port.png";
 import social from "../assets/social.png";
 import chat from "../assets/chat.png";
-const projects = [
-  {
-    title: "AI Image Generator",
-    description:
-      "AI-powered image generator that creates stunning visuals based on user input. Utilizing advanced machine learning algorithms, this tool transforms text descriptions into high-quality images with precision and creativity.",
-    image: imageGene,
-    technologies: [
-      "MongoDB",
-      "ExpressJs",
-      "React",
-      "NodeJs",
-      "styled components",
-      "JavaScript",
-      "Vite",
-    ],
-    link: "https://github.com/Arvindkumar20/AiImageGeneratorFrontend",
-  },
-  {
-    title: "AI Chatbot",
-    description:
-      "Developed an AI-powered chatbot using React, Node.js, Express, and Tailwind CSS, integrated with Google's Gemini AI for intelligent and context-aware responses. This chatbot provides real-time interactions, understanding natural language inputs and delivering accurate responses. Designed with a sleek UI and efficient backend, it enhances user experience by offering smart assistance in various domains.",
-    image: chatbot,
-    technologies: [
-      "Express",
-      "React",
-      "Node.js",
-      "JavaScript",
-      "Gemini",
-      "Tailwind",
-    ],
-    link: "https://github.com/Arvindkumar20/chat-Bot",
-  },
-  {
-    title: "ToDoList App",
-    description:
-      "Built a dynamic and user-friendly To-Do List application using React, Node.js, Express, and MongoDB. This app allows users to efficiently manage tasks with features such as task creation, real-time updates, deletion, and retrieval. With a clean and responsive UI, users can mark tasks as completed, edit existing tasks, and organize their workflow seamlessly. The backend ensures smooth data storage and retrieval, making task management hassle-free.",
-    image: todo,
-    technologies: [
-      "MongoDB",
-      "ExpressJs",
-      "React",
-      "Nodejs",
-      "Tailwind",
-      "JavaScript",
-    ],
-    link: "https://github.com/Arvindkumar20/ToDoListApp_Frontend",
-  },
-  {
-    title: "PortFolio",
-    description:
-      "Built a dynamic and user-friendly PortFolio web application using React,Html,Css and js. This app allows users to efficiently Explore my skills education and projetcs.With a clean and responsive UI, users can visit My PortFolio web page.",
-    image: port,
-    technologies: ["React", "Html", "Css", "JavaScript"],
-    link: "#",
-  },
-  {
-    title: "Social Media App",
-    description:
-      "Built a dynamic and user-friendly Social Media application using React, Node.js, Express, and MongoDB.This app allows users to efficiently manage posts,comment and user profile with features such as create post, update post, upadete user profile, comment, like,share and real-time updates, deletion, and retrieval. With a clean and responsive UI, users can visit application.Complete user authentication with yup. The backend ensures smooth data storage and retrieval, making user management hassle-free.",
-    image: social,
-    technologies: [
-      "MongoDB",
-      "ExpressJs",
-      "React",
-      "Nodejs",
-      "Styled components",
-      "@MUI",
-    ],
-    link: "#",
-  },
-  {
-    title: "Chat Application",
-    description:
-      "Built a dynamic and user-friendly Chat application using React, Node.js, Express, and MongoDB. This app allows users to efficiently manage chat and chat history with features such as chat creation, real-time updates, deletion, and retrieval. With a clean and responsive UI, users can handle chat history. The backend ensures smooth data storage and retrieval, making chat management hassle-free.",
-    image: chat,
-    technologies: [
-      "React",
-      "Nodejs",
-      "socket.io",
-      "Html",
-      "Tailwind",
-      "JavaScript",
-    ],
-    link: "https://github.com/Arvindkumar20/chatApp",
-  },
-];
+import "./RecentWorks.css";
+import axios from "axios";
+
+// const projects = [
+//   {
+//     title: "AI Image Generator",
+//     description:
+//       "AI-powered image generator that creates stunning visuals based on user input.",
+//     image: imageGene,
+//     technologies: [
+//       "MongoDB",
+//       "ExpressJs",
+//       "React",
+//       "NodeJs",
+//       "Styled Components",
+//       "JavaScript",
+//       "Vite",
+//     ],
+//     link: "https://github.com/Arvindkumar20/AiImageGeneratorFrontend",
+//   },
+//   {
+//     title: "AI Chatbot",
+//     description:
+//       "AI-powered chatbot using React, Node.js, Express, and Tailwind CSS, integrated with Gemini AI.",
+//     image: chatbot,
+//     technologies: [
+//       "Express",
+//       "React",
+//       "Node.js",
+//       "JavaScript",
+//       "Gemini",
+//       "Tailwind",
+//     ],
+//     link: "https://github.com/Arvindkumar20/chat-Bot",
+//   },
+//   {
+//     title: "ToDoList App",
+//     description:
+//       "A dynamic To-Do List app with task management, real-time updates, and a clean UI.",
+//     image: todo,
+//     technologies: [
+//       "MongoDB",
+//       "ExpressJs",
+//       "React",
+//       "Nodejs",
+//       "Tailwind",
+//       "JavaScript",
+//     ],
+//     link: "https://github.com/Arvindkumar20/ToDoListApp_Frontend",
+//   },
+//   {
+//     title: "Portfolio",
+//     description:
+//       "Personal portfolio showcasing projects, skills, and education with a sleek UI.",
+//     image: port,
+//     technologies: ["React", "HTML", "CSS", "JavaScript"],
+//     link: "https://github.com/Arvindkumar20/potential-octo-train",
+//   },
+//   {
+//     title: "Social Media App",
+//     description:
+//       "A feature-rich social media platform with posts, comments, likes, and real-time updates.",
+//     image: social,
+//     technologies: ["MongoDB", "ExpressJs", "React", "Nodejs", "MUI"],
+//     link: "https://github.com/Arvindkumar20/Social_Media",
+//   },
+//   {
+//     title: "Chat Application",
+//     description:
+//       "A real-time chat app with Socket.io, message history, and a modern UI.",
+//     image: chat,
+//     technologies: [
+//       "React",
+//       "Nodejs",
+//       "Socket.io",
+//       "HTML",
+//       "Tailwind",
+//       "JavaScript",
+//     ],
+//     link: "https://github.com/Arvindkumar20/ai_chatbot",
+//   },
+// ];
 
 const RecentWorks = () => {
+  const [projects, setProjects] = useState();
+
+  const loadProjects = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/project/get");
+      console.log(res);
+      setProjects(res.data.projects);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    loadProjects();
+  }, []);
+
   return (
     <section className="recent-works" id="projects">
-      <h2 className="section-title">🚀 Recent Works</h2>
+      <motion.h2
+        className="section-title"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        🚀 Recent Works
+      </motion.h2>
+
       <div className="projects-container">
-        {projects.map((project, index) => (
-          <div key={index} className="project-card">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="project-image"
-            />
-            <div className="project-content">
-              <h3 className="project-title">
-                <FaCode className="icon" /> {project.title}
-              </h3>
-              <p className="project-description">{project.description}</p>
+        {projects?.length > 0 &&
+          projects?.map((project, index) => (
+            <motion.div
+              key={index}
+              className="project-card"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{
+                scale: 1.05,
+                rotateY: 5,
+                rotateX: 5,
+                boxShadow: "0px 10px 20px rgba(255, 255, 255, 0.3)",
+                transition: { duration: 0.4, ease: "easeInOut" },
+              }}
+            >
+              <motion.div
+                className="image-container"
+                whileHover={{ scale: 1.08, rotateY: 5 }}
+              >
+                <motion.img
+                  src={project.image.url}
+                  alt={project.title}
+                  className="project-image"
+                />
+              </motion.div>
+              <div className="project-content">
+                <h3 className="project-title">
+                  <FaCode className="icon" /> {project.title}
+                </h3>
+                <p className="project-description">{project.description}</p>
 
-              {/* Tech Stack */}
-              <div className="tech-stack">
-                {project.technologies.map((tech, idx) => (
-                  <span key={idx} className="tech-badge">
-                    {tech}
-                  </span>
-                ))}
+                <motion.div
+                  className="tech-stack"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  {project.technologies.map((tech, idx) => (
+                    <motion.span
+                      key={idx}
+                      className="tech-badge"
+                      whileHover={{
+                        scale: 1.1,
+                        backgroundColor: "#FF4500",
+                        color: "#fff",
+                      }}
+                    >
+                      {tech}
+                    </motion.span>
+                  ))}
+                </motion.div>
+
+                <motion.a
+                  href={project.link}
+                  className="read-more"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: "#007bff",
+                    color: "#fff",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  Read more <FaExternalLinkAlt className="link-icon" />
+                </motion.a>
               </div>
-
-              {/* Read More Button */}
-              <a href={project.link} className="read-more">
-                Read more <FaExternalLinkAlt className="link-icon" />
-              </a>
-            </div>
-          </div>
-        ))}
+            </motion.div>
+          ))}
       </div>
     </section>
   );
